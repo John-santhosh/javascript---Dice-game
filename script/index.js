@@ -1,13 +1,22 @@
-let randomNumber1 = function(){
-    return Math.floor(Math.random()*6)+1
+function randomNumber1() {
+  return Math.floor(Math.random() * 6) + 1;
 }
 
-let p1=randomNumber1()
-document.querySelector(".img1").setAttribute("src",`images/dice${p1}.png`)
+$("button").click(() => {
+  let p1 = randomNumber1();
+  let p2 = randomNumber1();
 
-let p2= randomNumber1();
-document.querySelector(".img2").setAttribute("src",`images/dice${p2}.png`);
+  $(".img1").addClass("rotate");
+  $(".img2").addClass("rotate");
 
-let result = p1>p2?"player 1 wins 🚩": p2>p1 ? "player 2 wins 🚩" : "draw"
+  setTimeout(() => {
+    $(".img1").removeClass("rotate");
+    $(".img2").removeClass("rotate");
 
-document.querySelector("h1").innerHTML=`${result}`
+    $(".img1").attr("src", `images/dice${p1}.png`);
+    $(".img2").attr("src", `images/dice${p2}.png`);
+    $("h1").text(
+      p1 > p2 ? "player 1 wins 🚩" : p2 > p1 ? "player 2 wins 🚩" : "draw"
+    );
+  }, 1100);
+});
